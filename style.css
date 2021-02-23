@@ -24,7 +24,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	background-image: url('https://www.outside.fr/wp-content/uploads/2019/01/outside-guide-grand-canyon_h.jpg');
+	background-image: url('./reservoir-canyon.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 }

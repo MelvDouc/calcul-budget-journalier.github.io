@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+:root{
+	--dark: #222;
+	--green: #0f0;
+	--font1: 'Open Sans', Verdana, sans-serif;
+	--fs1: large;
+	--bordure: 1px solid black;
+	--padding1: .75em;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	font-family: var(--font1);
+}
+
+html, body {
+	margin: 0;
+	height: 100vh;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-image: url('https://www.outside.fr/wp-content/uploads/2019/01/outside-guide-grand-canyon_h.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#content {
+	display: grid;
+	/*grid-template-rows: 6fr 1fr;*/
+	position: relative;
+}
+
+#content > div {
+	background-color: var(--dark);
+	color: var(--green);
+	border: var(--bordure);
+}
+
+label {
+	margin-right: 1em;
+}
+
+input {
+	width: 15%;
+	text-align: right;
+	font-size: var(--fs1);
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+p {
+	margin: 0
+}
+
+#infos {
+	margin-bottom: 1em;
+	display: grid;
+	grid-template-rows: repeat(4, 1fr) 2fr;
+}
+
+#infos > div {
+	display: flex;
+	align-items: center;
+}
+
+.inputs {
+	justify-content: space-between;
+	padding: var(--padding1);
+}
+
+#div-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+#btn-reset {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#btn-reset:hover {
+	filter: hue-rotate(45deg);
+}
+
+#btn-reset:active {
+	transform: scale(.9);
+}
+
+#btn-reset::selection {
+	background-color: transparent;
+}
+
+#div-budget {
+	display: flex;
+	align-items: center;
+	padding: var(--padding1);
+}
+
+#span1 {
+	font-weight: bold;
+	color: #ffff00;
+	font-size: var(--fs1);
+}
+
+#div-date {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 1em;
+	font-weight: 600;
+	background-color: rgba(255, 255, 255, .25);
+}
+
+#div-date:hover {
+	background-color: rgba(255, 255, 255, 1);
+}

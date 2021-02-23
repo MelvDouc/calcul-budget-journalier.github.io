@@ -82,12 +82,17 @@ p {
 }
 
 #btn-reset {
-	text-decoration: underline;
+	background: white;
+    padding: .5em;
+    border-radius: 5px;
+    color: var(--dark);
+    font-size: .92em;
 	cursor: pointer;
 }
 
 #btn-reset:hover {
-	filter: hue-rotate(45deg);
+	color: var(--green);
+	background: rgb(0,0,0);
 }
 
 #btn-reset:active {

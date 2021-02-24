@@ -1,57 +1,64 @@
 let d = new Date(),
-	annee = d.getFullYear(),
-	mois = d.getMonth() + 1,
-	jour = d.getDate(),
-	nombreJoursDansMois = new Date(annee, mois, 0).getDate();
-const inputFonds = document.querySelector('#fonds'),
-	inputDateJour = document.querySelector('#dateJour'),
-	inputLgMois = document.querySelector('#longueurMois'),
-	inputRevenuSuivant = document.querySelector('#jourRevenuSuivant'),
+	year = d.getFullYear(),
+	month = d.getMonth() + 1,
+	day = d.getDate(),
+	monthLength = new Date(year, month, 0).getDate();
+const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+	weekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+const availableSumInput = document.querySelector('#available-sum'),
+	currentDayInput = document.querySelector('#current-day'),
+	monthLengthInput = document.querySelector('#month-length'),
+	nextIncomeInput = document.querySelector('#next-income'),
 	inputs = document.querySelectorAll('input'),
-	span1 = document.querySelector('#span1');
+	resetButton = document.querySelector('#reset-button'),
+	span1 = document.querySelector('#span1'),
+	defaultValues = ['', day, monthLength, 5];
 
 //
 
-inputDateJour.value = jour;
-inputLgMois.value = nombreJoursDansMois;
-document.querySelector('#div-date').innerText = d.toLocaleDateString();
+currentDayInput.value = day;
+monthLengthInput.value = monthLength;
+let fullDate = `${weekDays[d.getDay() - 1]} ${day} ${months[d.getMonth()]} ${year}`;
+document.querySelector('#display-date').innerText = fullDate;
 
 //
 
-function entierVal(elem) { // inputLgMois.value causait des erreurs sans cette conversion.
-	return parseFloat(elem.value);
+function getValue(elem) { // monthLengthInput.value causait des erreurs sans cette conversion.
+	return (elem.value != '') ? elem.valueAsNumber : elem.value;
 }
 
-function calculerBudget() {
-	if (inputFonds.value != '' && inputDateJour.value != '' && inputLgMois.value != '' && inputRevenuSuivant.value != '') {
-		let budgetJournalier
-			= entierVal(inputFonds) / (1 + entierVal(inputLgMois) - entierVal(inputDateJour) + (entierVal(inputRevenuSuivant) - 1));
-		span1.innerText = budgetJournalier.toFixed(2);
+function calculateBudget() {
+	if (Object.values(inputs).every(input => input.value != '')) {
+		let denominator = getValue(monthLengthInput) - getValue(currentDayInput) + (getValue(nextIncomeInput) - 1) + 1,
+		dailyBudget = getValue(availableSumInput) / denominator;
+		span1.innerText = (isNaN(dailyBudget) || !isFinite(dailyBudget)) ? 'N.D.' : dailyBudget.toFixed(2);
 	} else {
-		span1.innerText = null;
+		span1.innerText = '';
 	}
 }
 
-Object.values(inputs).forEach(inputField => {
-	inputField.addEventListener('keyup', calculerBudget);
+Object.values(inputs).forEach(input => {
+	input.addEventListener('keyup', calculateBudget);
 })
 
 //
 
-function reinitialiser() {
-	span1.innerText = null;
-
-	if (inputFonds.value != '' || entierVal(inputDateJour) != jour || entierVal(inputLgMois) != nombreJoursDansMois || entierVal(inputRevenuSuivant) != 5) {
-		inputDateJour.value = jour;
-		inputLgMois.value = nombreJoursDansMois;
-		inputRevenuSuivant.value = 5;
-	} else {
-		inputDateJour.value = '';
-		inputLgMois.value = '';
-		inputRevenuSuivant.value = '';
-	}
-
-	inputFonds.value = '';
+function checkDefaultValues() {
+	return defaultValues.every((val, i) => val == getValue(inputs[i]));
 }
 
-document.querySelector('#btn-reset').addEventListener('click', reinitialiser);
+function reset() {
+	span1.innerText = null;
+
+	let isDefaultValues = checkDefaultValues(); /* Exécuter la fonction ds la boucle fausse le résultat. */
+	for(input of inputs) {
+		input.value = (!isDefaultValues) ? defaultValues[Object.values(inputs).indexOf(input)] : '';
+	}
+}
+
+function setResetButtonTitle() {
+	resetButton.title = (checkDefaultValues()) ? 'Tout effacer' : 'Restaurer les valeurs par défaut';
+}
+
+resetButton.addEventListener('click', reset);
+resetButton.addEventListener('mouseover', setResetButtonTitle);

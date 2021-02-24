@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-	<link rel="stylesheet" type="text/css" href="./style.css">
+	<meta charset="utf-8">
+	<meta name="description" content="Application de calcul de budget journalier">
+	<meta name="keywords" content="budget, journalier, application, calcul">
+	<meta name="author" content="Melvin DOUCET">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
 	<script src="./main.js" defer></script>
 	<title>Calcul budget journalier</title>
 </head>
@@ -11,35 +16,35 @@
 
 	<div id="content">
 
-		<div id="infos">
+		<div id="info">
 			<div class="inputs">
-				<label for="fonds">Fonds disponibles</label>
-				<input type="number" name="fonds" id="fonds">
+				<label for="available-sum">Fonds disponibles</label>
+				<input type="number" name="available-sum" id="available-sum">
 			</div>
 			<div class="inputs">
-				<label for="dateJour">Date du jour</label>
-				<input type="number" name="dateJour" id="dateJour" min="1" max="31">
+				<label for="current-day">Date du jour</label>
+				<input type="number" name="current-day" id="current-day" min="1" max="31">
 			</div>
 			<div class="inputs">
-				<label for="longueurMois">Longueur du mois (jours)</label>
-				<input type="number" name="longueurMois" id="longueurMois" min="28" max="31">
+				<label for="month-length">Longueur du mois (jours)</label>
+				<input type="number" name="month-length" id="month-length" min="28" max="31">
 			</div>
 			<div class="inputs">
-				<label for="jourRevenuSuivant">Jour du prochain revenu</label>
-				<input type="number" name="jourRevenuSuivant" id="jourRevenuSuivant" min="1" max="31" value="5">
+				<label for="next-income">Jour du prochain revenu</label>
+				<input type="number" name="next-income" id="next-income" min="1" max="31" value="5">
 			</div>
-			<div id="div-btn">
-				<span id="btn-reset" title="Cliquez deux fois pour tout effacer.">Réinitialiser</span>
+			<div id="button">
+				<span id="reset-button" title="Cliquez pour tout effacer.">Réinitialiser</span>
 			</div>
 		</div>
 
-		<div id="div-budget">
+		<div id="display-budget">
 			<p>Budget journalier&thinsp;: <span id="span1"></span></p>
 		</div>
 
 	</div>
 
-	<div id="div-date"></div>
+	<div id="display-date"></div>
 
 </body>
 

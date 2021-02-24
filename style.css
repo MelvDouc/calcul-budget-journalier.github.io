@@ -5,7 +5,7 @@
 	--green: #0f0;
 	--font1: 'Open Sans', Verdana, sans-serif;
 	--fs1: large;
-	--bordure: 1px solid black;
+	--border1: 1px solid black;
 	--padding1: .75em;
 }
 
@@ -26,19 +26,18 @@ body {
 	flex-direction: column;
 	background-image: url('./reservoir-canyon.jpg');
 	background-size: cover;
+	background-position: center;
 	background-repeat: no-repeat;
 }
 
 #content {
-	display: grid;
-	/*grid-template-rows: 6fr 1fr;*/
 	position: relative;
 }
 
 #content > div {
 	background-color: var(--dark);
 	color: var(--green);
-	border: var(--bordure);
+	border: var(--border1);
 }
 
 label {
@@ -60,13 +59,13 @@ p {
 	margin: 0
 }
 
-#infos {
+#info {
 	margin-bottom: 1em;
 	display: grid;
 	grid-template-rows: repeat(4, 1fr) 2fr;
 }
 
-#infos > div {
+#info > div {
 	display: flex;
 	align-items: center;
 }
@@ -76,12 +75,12 @@ p {
 	padding: var(--padding1);
 }
 
-#div-btn {
+#button {
     width: 100%;
     justify-content: center;
 }
 
-#btn-reset {
+#reset-button {
 	background: white;
     padding: .5em;
     border-radius: 5px;
@@ -90,20 +89,20 @@ p {
 	cursor: pointer;
 }
 
-#btn-reset:hover {
+#reset-button:hover {
 	color: var(--green);
 	background: rgb(0,0,0);
 }
 
-#btn-reset:active {
+#reset-button:active {
 	transform: scale(.9);
 }
 
-#btn-reset::selection {
+#reset-button::selection {
 	background-color: transparent;
 }
 
-#div-budget {
+#display-budget {
 	display: flex;
 	align-items: center;
 	padding: var(--padding1);
@@ -115,15 +114,15 @@ p {
 	font-size: var(--fs1);
 }
 
-#div-date {
+#display-date {
 	position: absolute;
 	top: 0;
 	right: 0;
-	padding: 1em;
+	padding: .9em;
 	font-weight: 600;
-	background-color: rgba(255, 255, 255, .25);
+	background-color: rgba(255, 255, 255, .45);
 }
 
-#div-date:hover {
+#display-date:hover {
 	background-color: rgba(255, 255, 255, 1);
 }

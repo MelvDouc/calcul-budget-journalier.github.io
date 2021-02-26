@@ -24,13 +24,13 @@ document.querySelector('#display-date').innerText = fullDate;
 //
 
 function getValue(elem) { // monthLengthInput.value causait des erreurs sans cette conversion.
-	return (elem.value != '') ? elem.valueAsNumber : elem.value;
+	return (elem.value != '') ? Number(elem.value) : elem.value;
 }
 
 function calculateBudget() {
 	if (Object.values(inputs).every(input => input.value != '')) {
 		let denominator = getValue(monthLengthInput) - getValue(currentDayInput) + (getValue(nextIncomeInput) - 1) + 1,
-		dailyBudget = getValue(availableSumInput) / denominator;
+			dailyBudget = getValue(availableSumInput) / denominator;
 		span1.innerText = (isNaN(dailyBudget) || !isFinite(dailyBudget)) ? 'N.D.' : dailyBudget.toFixed(2);
 	} else {
 		span1.innerText = '';
@@ -48,10 +48,10 @@ function checkDefaultValues() {
 }
 
 function reset() {
-	span1.innerText = null;
+	span1.innerText = '';
 
-	let isDefaultValues = checkDefaultValues(); /* Exécuter la fonction ds la boucle fausse le résultat. */
-	for(input of inputs) {
+	let isDefaultValues = checkDefaultValues(); /* Cette valeur doit être vérifiée en dehors de la boucle. */
+	for (input of inputs) {
 		input.value = (!isDefaultValues) ? defaultValues[Object.values(inputs).indexOf(input)] : '';
 	}
 }
@@ -62,3 +62,34 @@ function setResetButtonTitle() {
 
 resetButton.addEventListener('click', reset);
 resetButton.addEventListener('mouseover', setResetButtonTitle);
+
+//
+
+function changeTheme() {
+	let root = document.querySelector(':root'),
+		select = document.querySelector('select#themes'),
+		setProperties = (elem, props) => {
+			for (let key in props) {
+				elem.style.setProperty(key, props[key]);
+			}
+		}
+
+	select.addEventListener('change', function () {
+		if (this.value == 'light') {
+			setProperties(root, {
+				'--borderColor1': 'blue',
+				'--borderColor2': 'ghostwhite',
+				'--borderColor-buttonHover': 'blue',
+				'--bgColor': '#fff',
+				'--bgColor-button': 'blue',
+				'--bgColor-buttonHover': 'ghostwhite',
+				'--textColor': 'blue',
+				'--textColor-budget': 'red'
+			})
+		} else {
+			root.removeAttribute('style');
+		}
+	})
+}
+
+changeTheme();

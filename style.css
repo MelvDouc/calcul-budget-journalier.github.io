@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
 :root{
-	--dark: #222;
-	--green: #0f0;
 	--font1: 'Open Sans', Verdana, sans-serif;
 	--fs1: large;
-	--border1: 1px solid black;
 	--padding1: .75em;
+	
+	--borderColor1: #000;
+	--borderColor2: #2b2b2b;
+	--borderColor-buttonHover: transparent;
+	--bgColor: #222;
+	--bgColor-button: #fff;
+	--bgColor-buttonHover: #000;
+	--textColor: #0f0;
+	--textColor-budget: #ffff00;
 }
 
 *, *::before, *::after {
@@ -32,12 +38,16 @@ body {
 
 #content {
 	position: relative;
+	display: grid;
+	grid-template-rows: 6fr 1fr;
 }
 
 #content > div {
-	background-color: var(--dark);
-	color: var(--green);
-	border: var(--border1);
+	background-color: var(--bgColor);
+	color: var(--textColor);
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--borderColor1);
 }
 
 label {
@@ -45,7 +55,7 @@ label {
 }
 
 input {
-	width: 15%;
+	width: 20%;
 	text-align: right;
 	font-size: var(--fs1);
 }
@@ -66,6 +76,7 @@ p {
 	margin-bottom: 1em;
 	display: grid;
 	grid-template-rows: repeat(4, 1fr) 2fr;
+	padding: 1em 1em 0 1em;
 }
 
 #info > div {
@@ -75,26 +86,36 @@ p {
 
 .inputs {
 	justify-content: space-between;
-	padding: var(--padding1);
+	margin-bottom: .85em;
 }
 
-#button {
+/*  */
+/*  */
+
+#controls {
     width: 100%;
     justify-content: center;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: var(--borderColor2);
 }
 
 #reset-button {
-	background: white;
+	background: var(--bgColor-button);
     padding: .5em;
     border-radius: 5px;
-    color: var(--dark);
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+    color: var(--bgColor);
     font-size: .92em;
 	cursor: pointer;
 }
 
 #reset-button:hover {
-	color: var(--green);
-	background: rgb(0,0,0);
+	color: var(--textColor);
+	background-color: var(--bgColor-buttonHover);
+	border-color: var(--borderColor-buttonHover);
 }
 
 #reset-button:active {
@@ -116,7 +137,7 @@ p {
 
 #span1 {
 	font-weight: bold;
-	color: #ffff00;
+	color: var(--textColor-budget);
 	font-size: var(--fs1);
 }
 
@@ -125,13 +146,28 @@ p {
 
 #display-date {
 	position: absolute;
-	top: 0;
 	right: 0;
-	padding: .9em;
+	top: 0;
+	padding: .7em .9em;
 	font-weight: 600;
 	background-color: rgba(255, 255, 255, .6);
 }
 
 #display-date:hover {
 	background-color: rgba(255, 255, 255, 1);
+}
+
+/*  */
+/*  */
+
+#theme-selection {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	padding: .5em;
+}
+
+#themes {
+	border-radius: 0;
+	font-family: Constantia, 'Times New Roman', serif;
 }

@@ -8,8 +8,7 @@
 	<meta name="author" content="Melvin DOUCET">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./assets/css/style.css">
-	<script src="./assets/js/main.js" defer></script>
-	<title>Calcul budget journalier</title>
+	<script type="module" src="./assets/js/main.js" defer></script>
 </head>
 
 <body>
@@ -17,24 +16,7 @@
 	<div id="content">
 
 		<div id="info">
-			<div id="the_inputs">
-				<div class="inputs">
-					<label for="available-sum" title="La somme d'argent utilisable pour le mois en cours">Fonds disponibles</label>
-					<input type="number" name="available-sum" id="available-sum">
-				</div>
-				<div class="inputs">
-					<label for="current-day" title="Le numéro de ce jour dans le mois">Date du jour</label>
-					<input type="number" name="current-day" id="current-day" min="1" max="31">
-				</div>
-				<div class="inputs">
-					<label for="month-length" title="Le nombre de jours ce mois-ci">Longueur du mois (jours)</label>
-					<input type="number" name="month-length" id="month-length" min="28" max="31">
-				</div>
-				<div class="inputs">
-					<label for="next-income" title="Le numéro du jour de la rentrée d'argent du mois prochain">Jour du prochain revenu</label>
-					<input type="number" name="next-income" id="next-income" min="1" max="31" value="5">
-				</div>
-			</div>
+			<div id="the_inputs"></div>
 			<div id="controls">
 				<span id="reset-button" title="Tout effacer">Réinitialiser</span>
 			</div>

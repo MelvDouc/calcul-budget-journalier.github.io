@@ -1,27 +1,69 @@
+import { InputDiv } from './classes/InputDiv.js';
+
 let d = new Date(),
 	year = d.getFullYear(),
 	month = d.getMonth() + 1,
 	day = d.getDate(),
 	monthLength = new Date(year, month, 0).getDate();
 const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
-	weekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
-const availableSumInput = document.querySelector('#available-sum'),
-	currentDayInput = document.querySelector('#current-day'),
-	monthLengthInput = document.querySelector('#month-length'),
-	nextIncomeInput = document.querySelector('#next-income'),
-	inputs = document.querySelectorAll('input'),
-	resetButton = document.querySelector('#reset-button'),
-	span1 = document.querySelector('#span1'),
+	weekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
+	the_inputs = document.getElementById('the_inputs'),
+	resetButton = document.getElementById('reset-button'),
+	span1 = document.getElementById('span1'),
 	defaultValues = ['', day, monthLength, 5];
 
-//
+const inputDivsData = [
+	{
+		id: 'available-sum',
+		title: 'La somme d\'argent utilisable pour le mois en cours',
+		labelTxt: 'Fonds disponibles',
+		min: undefined,
+		max: undefined,
+		val: undefined
+	},
+	{
+		id: 'current-day',
+		title: 'Le numéro de ce jour dans le mois',
+		labelTxt: 'Date du jour',
+		min: 1,
+		max: 31,
+		val: day
+	},
+	{
+		id: 'month-length',
+		title: 'Le nombre de jours ce mois-ci',
+		labelTxt: 'Longueur du mois',
+		min: 28,
+		max: 31,
+		val: monthLength
+	},
+	{
+		id: 'next-income',
+		title: 'Le numéro du jour de la rentrée d\'argent du mois prochain',
+		labelTxt: 'Date du prochain revenu',
+		min: 1,
+		max: 31,
+		val: 5
+	}
+]
 
-currentDayInput.value = day;
-monthLengthInput.value = monthLength;
+inputDivsData.forEach(data => {
+	let inputDiv = new InputDiv(...Object.values(data));
+	the_inputs.appendChild(inputDiv);
+})
+
+const availableSumInput = document.getElementById('available-sum'),
+	currentDayInput = document.getElementById('current-day'),
+	monthLengthInput = document.getElementById('month-length'),
+	nextIncomeInput = document.getElementById('next-income'),
+	inputs = document.getElementsByTagName('input');
+
+// ===== ===== //
+
 let fullDate = `${weekDays[d.getDay() - 1]} ${day} ${months[d.getMonth()]} ${year}`;
-document.querySelector('#display-date').innerText = fullDate;
+document.getElementById('display-date').innerText = fullDate;
 
-//
+// ===== ===== //
 
 function getValue(elem) { // monthLengthInput.value causait des erreurs sans cette conversion.
 	return (elem.value != '') ? Number(elem.value) : elem.value;
@@ -41,7 +83,7 @@ Object.values(inputs).forEach(input => {
 	input.addEventListener('keyup', calculateBudget);
 })
 
-//
+// ===== ===== //
 
 function checkDefaultValues() {
 	return defaultValues.every((val, i) => val == getValue(inputs[i]));
@@ -51,7 +93,7 @@ function reset() {
 	span1.innerText = '';
 
 	let isDefaultValues = checkDefaultValues(); /* Cette valeur doit être vérifiée en dehors de la boucle. */
-	for (input of inputs) {
+	for (let input of inputs) {
 		input.value = (!isDefaultValues) ? defaultValues[Object.values(inputs).indexOf(input)] : '';
 	}
 }
@@ -63,11 +105,11 @@ function setResetButtonTitle() {
 resetButton.addEventListener('click', reset);
 resetButton.addEventListener('mouseover', setResetButtonTitle);
 
-//
+// ===== ===== //
 
 function changeTheme() {
 	let root = document.querySelector(':root'),
-		select = document.querySelector('select#themes'),
+		select = document.getElementById('themes'),
 		setProperties = (elem, props) => {
 			for (let key in props) {
 				elem.style.setProperty(key, props[key]);
@@ -93,5 +135,3 @@ function changeTheme() {
 }
 
 changeTheme();
-
-//

@@ -4,23 +4,23 @@ let d = new Date(),
 	year = d.getFullYear(),
 	month = d.getMonth() + 1,
 	day = d.getDate(),
-	monthLength = new Date(year, month, 0).getDate();
+	daysInMonth = new Date(year, month, 0).getDate();
 const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
 	weekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
-	the_inputs = document.getElementById('the_inputs'),
 	resetButton = document.getElementById('reset-button'),
-	span1 = document.getElementById('span1'),
-	defaultValues = ['', day, monthLength, 5];
+	span1 = document.getElementById('span1');
 
-const inputDivsData = [
+const inputDivsData = {
+	availableSum:
 	{
 		id: 'available-sum',
 		title: 'La somme d\'argent utilisable pour le mois en cours',
 		labelTxt: 'Fonds disponibles',
-		min: undefined,
-		max: undefined,
-		val: undefined
+		min: '',
+		max: '',
+		val: ''
 	},
+	currentDay:
 	{
 		id: 'current-day',
 		title: 'Le numéro de ce jour dans le mois',
@@ -29,14 +29,16 @@ const inputDivsData = [
 		max: 31,
 		val: day
 	},
+	monthLength:
 	{
 		id: 'month-length',
 		title: 'Le nombre de jours ce mois-ci',
 		labelTxt: 'Longueur du mois',
 		min: 28,
 		max: 31,
-		val: monthLength
+		val: daysInMonth
 	},
+	nextIncome:
 	{
 		id: 'next-income',
 		title: 'Le numéro du jour de la rentrée d\'argent du mois prochain',
@@ -45,12 +47,15 @@ const inputDivsData = [
 		max: 31,
 		val: 5
 	}
-]
+}
 
-inputDivsData.forEach(data => {
+Object.values(inputDivsData).forEach(data => {
 	let inputDiv = new InputDiv(...Object.values(data));
-	the_inputs.appendChild(inputDiv);
+	document.getElementById('the_inputs').appendChild(inputDiv);
 })
+
+let defaultValues = [];
+Object.values(inputDivsData).filter(data => defaultValues.push(data.val));
 
 const availableSumInput = document.getElementById('available-sum'),
 	currentDayInput = document.getElementById('current-day'),

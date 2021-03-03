@@ -98,9 +98,7 @@ function reset() {
 	span1.innerText = '';
 
 	let isDefaultValues = checkDefaultValues(); /* Cette valeur doit être vérifiée en dehors de la boucle. */
-	for (let input of inputs) {
-		input.value = (!isDefaultValues) ? defaultValues[Object.values(inputs).indexOf(input)] : '';
-	}
+	Object.values(inputs).forEach((input, i) => input.value = (!isDefaultValues) ? defaultValues[i] : '');
 }
 
 function setResetButtonTitle() {

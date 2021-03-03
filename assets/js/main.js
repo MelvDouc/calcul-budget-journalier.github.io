@@ -8,7 +8,7 @@ let d = new Date(),
 const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
 	weekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
 	resetButton = document.getElementById('reset-button'),
-	span1 = document.getElementById('span1');
+	budgetSpan = document.getElementById('budget-span');
 
 const inputDivsData = {
 	availableSum:
@@ -54,8 +54,9 @@ Object.values(inputDivsData).forEach(data => {
 	document.getElementById('the_inputs').appendChild(inputDiv);
 })
 
-let defaultValues = [];
-Object.values(inputDivsData).filter(data => defaultValues.push(data.val));
+let defaultValues = Object.values(inputDivsData).map(data => data.val);
+
+// ===== ===== //
 
 const availableSumInput = document.getElementById('available-sum'),
 	currentDayInput = document.getElementById('current-day'),
@@ -78,9 +79,9 @@ function calculateBudget() {
 	if (Object.values(inputs).every(input => input.value != '')) {
 		let denominator = getValue(monthLengthInput) - getValue(currentDayInput) + (getValue(nextIncomeInput) - 1) + 1,
 			dailyBudget = getValue(availableSumInput) / denominator;
-		span1.innerText = (isNaN(dailyBudget) || !isFinite(dailyBudget)) ? 'N.D.' : dailyBudget.toFixed(2);
+		budgetSpan.innerText = (isNaN(dailyBudget) || !isFinite(dailyBudget)) ? 'N.D.' : dailyBudget.toFixed(2);
 	} else {
-		span1.innerText = '';
+		budgetSpan.innerText = '';
 	}
 }
 
@@ -95,7 +96,7 @@ function checkDefaultValues() {
 }
 
 function reset() {
-	span1.innerText = '';
+	budgetSpan.innerText = '';
 
 	let isDefaultValues = checkDefaultValues(); /* Cette valeur doit être vérifiée en dehors de la boucle. */
 	Object.values(inputs).forEach((input, i) => input.value = (!isDefaultValues) ? defaultValues[i] : '');

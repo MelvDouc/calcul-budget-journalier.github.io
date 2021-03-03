@@ -140,7 +140,7 @@ p {
 	padding: var(--padding1);
 }
 
-#span1 {
+#budget-span {
 	font-weight: bold;
 	color: var(--textColor-budget);
 	font-size: var(--fs1);

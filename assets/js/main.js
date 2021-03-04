@@ -45,7 +45,7 @@ const inputDivsData = {
 		labelTxt: 'Date du prochain revenu',
 		min: 1,
 		max: 31,
-		val: 5
+		val: ''
 	}
 }
 

@@ -15,7 +15,7 @@ const inputDivsData = {
 	{
 		id: 'available-sum',
 		title: 'La somme d\'argent utilisable pour le mois en cours',
-		labelTxt: 'Fonds disponibles',
+		labelText: 'Fonds disponibles',
 		min: '',
 		max: '',
 		val: ''
@@ -24,7 +24,7 @@ const inputDivsData = {
 	{
 		id: 'current-day',
 		title: 'Le numéro de ce jour dans le mois',
-		labelTxt: 'Date du jour',
+		labelText: 'Date du jour',
 		min: 1,
 		max: 31,
 		val: day
@@ -33,7 +33,7 @@ const inputDivsData = {
 	{
 		id: 'month-length',
 		title: 'Le nombre de jours ce mois-ci',
-		labelTxt: 'Longueur du mois',
+		labelText: 'Longueur du mois',
 		min: 28,
 		max: 31,
 		val: daysInMonth
@@ -42,7 +42,7 @@ const inputDivsData = {
 	{
 		id: 'next-income',
 		title: 'Le numéro du jour de la rentrée d\'argent du mois prochain',
-		labelTxt: 'Date du prochain revenu',
+		labelText: 'Date du prochain revenu',
 		min: 1,
 		max: 31,
 		val: ''
@@ -85,9 +85,7 @@ function calculateBudget() {
 	}
 }
 
-Object.values(inputs).forEach(input => {
-	input.addEventListener('keyup', calculateBudget);
-})
+Object.values(inputs).forEach(input => input.addEventListener('keyup', calculateBudget))
 
 // ===== ===== //
 
@@ -98,7 +96,7 @@ function checkDefaultValues() {
 function reset() {
 	budgetSpan.innerText = '';
 
-	let isDefaultValues = checkDefaultValues(); /* Cette valeur doit être vérifiée en dehors de la boucle. */
+	let isDefaultValues = checkDefaultValues(); // Cette valeur doit être vérifiée en dehors de la boucle.
 	Object.values(inputs).forEach((input, i) => input.value = (!isDefaultValues) ? defaultValues[i] : '');
 }
 
@@ -113,20 +111,20 @@ resetButton.addEventListener('mouseover', setResetButtonTitle);
 
 function changeTheme() {
 	let root = document.querySelector(':root'),
-		select = document.getElementById('themes'),
-		setProperties = (elem, props) => {
-			for (let key in props) {
-				elem.style.setProperty(key, props[key]);
+		themeSelect = document.getElementById('themes'),
+		setProperties = (elem, properties) => {
+			for (let key in properties) {
+				elem.style.setProperty(key, properties[key]);
 			}
 		}
 
-	select.addEventListener('change', function () {
+	themeSelect.addEventListener('change', function () {
 		if (this.value == 'light') {
 			setProperties(root, {
 				'--borderColor1': 'blue',
 				'--borderColor2': 'ghostwhite',
 				'--borderColor-buttonHover': 'blue',
-				'--bgColor': '#fff',
+				'--bgColor': 'rgba(255, 255, 255, .91)',
 				'--bgColor-button': 'blue',
 				'--bgColor-buttonHover': 'ghostwhite',
 				'--textColor': 'blue',

@@ -9,7 +9,7 @@
 	--borderColor1: #000;
 	--borderColor2: #2b2b2b;
 	--borderColor-buttonHover: transparent;
-	--bgColor: #222;
+	--bgColor: rgba(43, 43, 43, .938);
 	--bgColor-button: #fff;
 	--bgColor-buttonHover: #000;
 	--textColor: #0f0;
@@ -54,6 +54,7 @@ main {
 #content > div {
 	background-color: var(--bgColor);
 	color: var(--textColor);
+	border-radius: 5px;
 	border-width: 1px;
 	border-style: solid;
 	border-color: var(--borderColor1);
@@ -74,6 +75,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
 p {
 	margin: 0
 }
@@ -88,12 +93,12 @@ p {
 	padding: 1em 1em 0 1em;
 }
 
-#the-inputs {
+#the_inputs {
 	display: grid;
 	grid-template-rows: repeat(4, 1fr);
 }
 
-.inputs {
+.input {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -144,14 +149,16 @@ p {
 
 #display-budget {
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	padding: var(--padding1);
 }
 
 #budget-span {
-	font-weight: bold;
 	color: var(--textColor-budget);
-	font-size: var(--fs1);
+	/* font-weight: bold; */
+	font-size: 1.2em;
+	font-family: Consolas, 'Lucida Console', monospace;
 }
 
 /*  */

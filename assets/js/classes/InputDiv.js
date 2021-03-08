@@ -8,7 +8,7 @@ export class InputDiv {
         this.val = val;
 
         let div = document.createElement('DIV')
-        div.classList.add('inputs');
+        div.classList.add('input');
 
         let label = document.createElement('LABEL');
         label.setAttribute('for', this.id);

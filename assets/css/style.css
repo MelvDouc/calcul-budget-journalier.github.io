@@ -5,9 +5,10 @@
 	--font1: 'Open Sans', Verdana, sans-serif;
 	--fs1: large;
 	--padding1: .75em;
+	--dodgerBlue: rgb(30, 144, 255);
 	
 	--borderColor1: #000;
-	--borderColor2: #2b2b2b;
+	--borderColor2: #333;
 	--borderColor-buttonHover: transparent;
 	--bgColor: rgba(43, 43, 43, .938);
 	--bgColor-button: #fff;
@@ -128,6 +129,7 @@ p {
     color: var(--bgColor);
     font-size: .92em;
 	cursor: pointer;
+	transition: transform .2s linear;
 }
 
 #reset-button:hover {
@@ -178,11 +180,26 @@ p {
 /*  */
 
 #theme-selection {
-	padding: .5em;
+	font-family: 'Shippori Mincho', Constantia, Georgia, 'Times New Roman', Times, serif;
 }
 
-#themes {
-	border-radius: 0;
-	font-family: 'Shippori Mincho', 'Times New Roman', serif;
-	/* font-size: var(--fs1); */
+#themes div {
+	padding: .15em .4em;
+	text-align: center;
+	cursor: default;
+	background-color: rgba(255, 255, 255, .75);
+}
+
+#themes div:hover {
+	background-color: var(--dodgerBlue);
+	color: #fff;
+}
+
+#themes div:first-child {
+	visibility: hidden;
+}
+
+#themes:hover div:first-child {
+	transition: visibility .2s linear;
+	visibility: visible;
 }

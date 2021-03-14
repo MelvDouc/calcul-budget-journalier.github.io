@@ -5,10 +5,9 @@ let d = new Date(),
 	month = d.getMonth() + 1,
 	day = d.getDate(),
 	daysInMonth = new Date(year, month, 0).getDate();
-const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
-	weekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'],
-	resetButton = document.getElementById('reset-button'),
-	budgetSpan = document.getElementById('budget-span');
+const resetButton = document.getElementById('reset-button'),
+	budgetSpan = document.getElementById('budget-span'),
+	themeSelect = document.getElementById('themes');
 
 const inputDivsData = {
 	availableSum:
@@ -66,8 +65,12 @@ const availableSumInput = document.getElementById('available-sum'),
 
 // ===== ===== //
 
-let fullDate = `${weekDays[d.getDay() - 1]} ${day} ${months[d.getMonth()]} ${year}`;
-document.getElementById('display-date').innerText = fullDate;
+function displayFullDate() {
+	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	return new Intl.DateTimeFormat('fr-Fr', options).format(new Date());
+}
+
+document.getElementById('display-date').innerText = displayFullDate();
 
 // ===== ===== //
 
@@ -111,29 +114,36 @@ resetButton.addEventListener('mouseover', setResetButtonTitle);
 
 function changeTheme() {
 	let root = document.querySelector(':root'),
-		themeSelect = document.getElementById('themes'),
 		setProperties = (elem, properties) => {
 			for (let key in properties) {
 				elem.style.setProperty(key, properties[key]);
 			}
 		}
 
-	themeSelect.addEventListener('change', function () {
-		if (this.value == 'light') {
-			setProperties(root, {
-				'--borderColor1': 'blue',
-				'--borderColor2': 'ghostwhite',
-				'--borderColor-buttonHover': 'blue',
-				'--bgColor': 'rgba(255, 255, 255, .91)',
-				'--bgColor-button': 'blue',
-				'--bgColor-buttonHover': 'ghostwhite',
-				'--textColor': 'blue',
-				'--textColor-budget': 'red'
-			})
-		} else {
-			root.removeAttribute('style');
-		}
-	})
+	for (let option of themeSelect.children) {
+		option.addEventListener('click', function () {
+			themeSelect.insertAdjacentElement('beforeend', option);
+			switch (this.id) {
+				case 'light-theme':
+					setProperties(root, {
+						'--borderColor1': 'blue',
+						'--borderColor2': 'ghostwhite',
+						'--borderColor-buttonHover': 'blue',
+						'--bgColor': 'rgba(255, 255, 255, .91)',
+						'--bgColor-button': 'blue',
+						'--bgColor-buttonHover': 'ghostwhite',
+						'--textColor': 'blue',
+						'--textColor-budget': 'red'
+					});
+					break;
+				case 'dark-theme':
+					root.removeAttribute('style');
+					break;
+			}
+		});
+	}
 }
 
 changeTheme();
+
+// ===== ===== //

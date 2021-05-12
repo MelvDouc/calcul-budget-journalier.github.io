@@ -93,20 +93,23 @@ document.getElementById("display-date").innerText = getFullDate();
 // ===== ===== ===== ===== =====
 
 function calculateBudget() {
-  if (Object.values(inputs).every((input) => input.value != "")) {
-    const denominator =
-      input_monthLength.value -
-      input_currentDay.value +
-      (input_nextIncome.value - 1) +
-      1;
-    const dailyBudget = input_availableSum.value / denominator;
-    budgetSpan.innerText =
-      isNaN(dailyBudget) || !isFinite(dailyBudget)
-        ? "N.D."
-        : dailyBudget.toFixed(2);
-  } else {
+  const is_emptyInputs = Object.values(inputs).some(
+    (input) => input.value == ""
+  );
+  if (is_emptyInputs) {
     budgetSpan.innerText = "";
+    return;
   }
+  const denominator =
+    input_monthLength.value -
+    input_currentDay.value +
+    (input_nextIncome.value - 1) +
+    1;
+  const dailyBudget = input_availableSum.value / denominator;
+  budgetSpan.innerText =
+    isNaN(dailyBudget) || !isFinite(dailyBudget)
+      ? "N.D."
+      : dailyBudget.toFixed(2);
 }
 
 Object.values(inputs).forEach((input) =>

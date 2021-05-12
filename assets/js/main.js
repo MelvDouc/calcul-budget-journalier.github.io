@@ -11,6 +11,16 @@ const date = new Date(),
 const resetButton = document.getElementById("reset-button"),
   budgetSpan = document.getElementById("budget-span"),
   themeSelect = document.getElementById("themes");
+const lightThemeProperties = {
+  "--borderColor1": "blue",
+  "--borderColor2": "ghostwhite",
+  "--borderColor-buttonHover": "blue",
+  "--bgColor": "rgba(255, 255, 255, .91)",
+  "--bgColor-button": "blue",
+  "--bgColor-buttonHover": "ghostwhite",
+  "--textColor": "blue",
+  "--textColor-budget": "red",
+};
 
 const inputDivsData = {
   availableSum: {
@@ -51,17 +61,21 @@ const inputDivsData = {
 // Generate Form
 // ===== ===== ===== ===== =====
 
-Object.values(inputDivsData).forEach((data) => {
-  const inputDiv = new InputDiv(...Object.values(data));
-  document.getElementById("the_inputs").appendChild(inputDiv);
-});
+function addFormGroups() {
+  Object.values(inputDivsData).forEach((data) => {
+    const inputDiv = new InputDiv(...Object.values(data));
+    document.getElementById("the_inputs").appendChild(inputDiv);
+  });
+}
+
+addFormGroups();
 
 const defaultValues = Object.values(inputDivsData).map((data) => data.val);
 
-const availableSumInput = document.getElementById("available-sum"),
-  currentDayInput = document.getElementById("current-day"),
-  monthLengthInput = document.getElementById("month-length"),
-  nextIncomeInput = document.getElementById("next-income"),
+const input_availableSum = document.getElementById("available-sum"),
+  input_currentDay = document.getElementById("current-day"),
+  input_monthLength = document.getElementById("month-length"),
+  input_nextIncome = document.getElementById("next-income"),
   inputs = document.getElementsByTagName("input");
 
 // ===== ===== ===== ===== =====
@@ -69,9 +83,7 @@ const availableSumInput = document.getElementById("available-sum"),
 // ===== ===== ===== ===== =====
 
 function getFullDate() {
-  return new Intl.DateTimeFormat("fr-Fr", { dateStyle: "full" }).format(
-    new Date()
-  );
+  return new Intl.DateTimeFormat("fr-Fr", { dateStyle: "full" }).format(date);
 }
 
 document.getElementById("display-date").innerText = getFullDate();
@@ -80,19 +92,14 @@ document.getElementById("display-date").innerText = getFullDate();
 // Calculate Budget
 // ===== ===== ===== ===== =====
 
-function getValue(elem) {
-  // monthLengthInput.value causait des erreurs sans cette conversion.
-  return elem.value != "" ? Number(elem.value) : elem.value;
-}
-
 function calculateBudget() {
-  if (Object.values(inputs).every((input) => input.value !== "")) {
+  if (Object.values(inputs).every((input) => input.value != "")) {
     const denominator =
-        getValue(monthLengthInput) -
-        getValue(currentDayInput) +
-        (getValue(nextIncomeInput) - 1) +
-        1,
-      dailyBudget = getValue(availableSumInput) / denominator;
+      input_monthLength.value -
+      input_currentDay.value +
+      (input_nextIncome.value - 1) +
+      1;
+    const dailyBudget = input_availableSum.value / denominator;
     budgetSpan.innerText =
       isNaN(dailyBudget) || !isFinite(dailyBudget)
         ? "N.D."
@@ -111,7 +118,7 @@ Object.values(inputs).forEach((input) =>
 // ===== ===== ===== ===== =====
 
 function checkDefaultValues() {
-  return defaultValues.every((val, i) => val === getValue(inputs[i]));
+  return defaultValues.every((val, i) => val == inputs[i].value);
 }
 
 function reset() {
@@ -148,16 +155,7 @@ function changeTheme() {
       themeSelect.insertAdjacentElement("beforeend", option);
       switch (this.id) {
         case "light-theme":
-          setProperties(document.documentElement, {
-            "--borderColor1": "blue",
-            "--borderColor2": "ghostwhite",
-            "--borderColor-buttonHover": "blue",
-            "--bgColor": "rgba(255, 255, 255, .91)",
-            "--bgColor-button": "blue",
-            "--bgColor-buttonHover": "ghostwhite",
-            "--textColor": "blue",
-            "--textColor-budget": "red",
-          });
+          setProperties(document.documentElement, lightThemeProperties);
           break;
         case "dark-theme":
           document.documentElement.removeAttribute("style");

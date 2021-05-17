@@ -1,4 +1,5 @@
 import { InputDiv } from "./classes/InputDiv.js";
+import { changeTheme } from "./theme.js";
 
 // ===== ===== ===== ===== =====
 // Data
@@ -9,18 +10,8 @@ const date = new Date(),
   month = date.getMonth() + 1,
   daysInMonth = new Date(year, month, 0).getDate();
 const resetButton = document.getElementById("reset-button"),
-  budgetSpan = document.getElementById("budget-span"),
-  themeSelect = document.getElementById("themes");
-const lightThemeProperties = {
-  "--borderColor1": "blue",
-  "--borderColor2": "ghostwhite",
-  "--borderColor-buttonHover": "blue",
-  "--bgColor": "rgba(255, 255, 255, .91)",
-  "--bgColor-button": "blue",
-  "--bgColor-buttonHover": "ghostwhite",
-  "--textColor": "blue",
-  "--textColor-budget": "red",
-};
+  budgetSpan = document.getElementById("budget-span");
+const themeSelect = document.getElementById("themes");
 
 const inputDivsData = {
   availableSum: {
@@ -146,26 +137,6 @@ resetButton.addEventListener("mouseover", setResetButtonTitle);
 // Set Color Theme
 // ===== ===== ===== ===== =====
 
-function changeTheme() {
-  const setProperties = (elem, properties) => {
-    for (const key in properties) {
-      elem.style.setProperty(key, properties[key]);
-    }
-  };
-
-  for (const option of themeSelect.children) {
-    option.addEventListener("click", function () {
-      themeSelect.insertAdjacentElement("beforeend", option);
-      switch (this.id) {
-        case "light-theme":
-          setProperties(document.documentElement, lightThemeProperties);
-          break;
-        case "dark-theme":
-          document.documentElement.removeAttribute("style");
-          break;
-      }
-    });
-  }
-}
-
-changeTheme();
+Object.values(themeSelect.children).forEach(option => {
+  option.addEventListener("click", changeTheme);
+});

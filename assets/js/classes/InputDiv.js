@@ -1,4 +1,4 @@
-export class InputDiv {
+export default class InputDiv {
   constructor(id, title, labelTxt, min, max, val) {
     this.id = id;
     this.title = title;

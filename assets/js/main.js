@@ -12,7 +12,6 @@ const date = new Date(),
 const resetButton = document.getElementById("reset-button"),
   budgetSpan = document.getElementById("budget-span");
 const themeSelect = document.getElementById("themes");
-
 const inputDivsData = {
   availableSum: {
     id: "available-sum",
@@ -47,41 +46,44 @@ const inputDivsData = {
     val: "",
   },
 };
+const defaultValues = Object.values(inputDivsData).map((data) => data.val);
 
 // ===== ===== ===== ===== =====
-// Generate Form
+// Generate Content
 // ===== ===== ===== ===== =====
 
-function addFormGroups() {
-  Object.values(inputDivsData).forEach((data) => {
+function setDate(containerID) {
+  const todayDate = new Intl.DateTimeFormat("fr-Fr", { dateStyle: "full" }).format(date);
+  document.getElementById(containerID).innerText = todayDate;
+}
+
+function addFormGroups(dataObject, containerID) {
+  Object.values(dataObject).forEach((data) => {
     const inputDiv = new InputDiv(...Object.values(data));
-    document.getElementById("the_inputs").appendChild(inputDiv);
+    document.getElementById(containerID).appendChild(inputDiv);
   });
 }
 
-addFormGroups();
+function generateContent() {
+  setDate("display-date");
+  addFormGroups(inputDivsData, "the_inputs");
+  // Color Theme
+  Object.values(themeSelect.children).forEach(option => {
+    option.addEventListener("click", changeTheme);
+  });
+}
 
-const defaultValues = Object.values(inputDivsData).map((data) => data.val);
+generateContent();
+
+// ===== ===== ===== ===== =====
+// Calculate Budget
+// ===== ===== ===== ===== =====
 
 const input_availableSum = document.getElementById("available-sum"),
   input_currentDay = document.getElementById("current-day"),
   input_monthLength = document.getElementById("month-length"),
   input_nextIncome = document.getElementById("next-income"),
   inputs = document.getElementsByTagName("input");
-
-// ===== ===== ===== ===== =====
-// Today's Date
-// ===== ===== ===== ===== =====
-
-function getFullDate() {
-  return new Intl.DateTimeFormat("fr-Fr", { dateStyle: "full" }).format(date);
-}
-
-document.getElementById("display-date").innerText = getFullDate();
-
-// ===== ===== ===== ===== =====
-// Calculate Budget
-// ===== ===== ===== ===== =====
 
 function calculateBudget() {
   const is_emptyInputs = Object.values(inputs).some(
@@ -118,7 +120,7 @@ function checkDefaultValues() {
 function reset() {
   budgetSpan.innerText = "";
 
-  const isDefaultValues = checkDefaultValues(); // Cette valeur doit être vérifiée en dehors de la boucle.
+  const isDefaultValues = checkDefaultValues(); // Value must be checked before running the loop.
   Object.values(inputs).forEach(
     (input, i) => (input.value = !isDefaultValues ? defaultValues[i] : "")
   );
@@ -132,11 +134,3 @@ function setResetButtonTitle() {
 
 resetButton.addEventListener("click", reset);
 resetButton.addEventListener("mouseover", setResetButtonTitle);
-
-// ===== ===== ===== ===== =====
-// Set Color Theme
-// ===== ===== ===== ===== =====
-
-Object.values(themeSelect.children).forEach(option => {
-  option.addEventListener("click", changeTheme);
-});

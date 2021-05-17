@@ -9,6 +9,7 @@ const date = new Date(),
   year = date.getFullYear(),
   month = date.getMonth() + 1,
   daysInMonth = new Date(year, month, 0).getDate();
+const inputs = document.getElementsByTagName("input");
 const resetButton = document.getElementById("reset-button"),
   budgetSpan = document.getElementById("budget-span");
 const themeSelect = document.getElementById("themes");
@@ -79,11 +80,7 @@ generateContent();
 // Calculate Budget
 // ===== ===== ===== ===== =====
 
-const input_availableSum = document.getElementById("available-sum"),
-  input_currentDay = document.getElementById("current-day"),
-  input_monthLength = document.getElementById("month-length"),
-  input_nextIncome = document.getElementById("next-income"),
-  inputs = document.getElementsByTagName("input");
+const valueByID = id => document.getElementById(id).value;
 
 function calculateBudget() {
   const is_emptyInputs = Object.values(inputs).some(
@@ -93,12 +90,13 @@ function calculateBudget() {
     budgetSpan.innerText = "";
     return;
   }
+
   const denominator =
-    input_monthLength.value -
-    input_currentDay.value +
-    (input_nextIncome.value - 1) +
-    1;
-  const dailyBudget = input_availableSum.value / denominator;
+    valueByID("month-length")
+    - valueByID("current-day")
+    + (valueByID("next-income") - 1)
+    + 1;
+  const dailyBudget = valueByID("available-sum") / denominator;
   budgetSpan.innerText =
     isNaN(dailyBudget) || !isFinite(dailyBudget)
       ? "N.D."
@@ -121,9 +119,9 @@ function reset() {
   budgetSpan.innerText = "";
 
   const isDefaultValues = checkDefaultValues(); // Value must be checked before running the loop.
-  Object.values(inputs).forEach(
-    (input, i) => (input.value = !isDefaultValues ? defaultValues[i] : "")
-  );
+  Object.values(inputs).forEach((input, i) => {
+    input.value = !isDefaultValues ? defaultValues[i] : "";
+  });
 }
 
 function setResetButtonTitle() {

@@ -1,5 +1,5 @@
-import { InputDiv } from "./classes/InputDiv.js";
-import { changeTheme } from "./theme.js";
+import InputDiv from "./classes/InputDiv.js";
+import changeTheme from "./theme.js";
 
 // ===== ===== ===== ===== =====
 // Data

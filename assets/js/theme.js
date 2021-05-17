@@ -14,7 +14,7 @@ function setProperties(elem, properties) {
     elem.style.setProperty(key, properties[key]);
 }
 
-export function changeTheme(e) {
+export default function changeTheme(e) {
   const option = e.target;
   const root = document.documentElement;
   option.parentElement.insertAdjacentElement("beforeend", option);

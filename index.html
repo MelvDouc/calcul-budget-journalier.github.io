@@ -13,31 +13,45 @@
 	<script type="module" src="./assets/js/main.js"></script>
 </head>
 
-<body>
+<body class="dark-theme">
 
 	<main>
-		<div id="display-date"></div>
+		<date-display></date-display>
 
 		<div id="content">
 			<div id="info">
-				<div id="the_inputs"></div>
+				<div id="the_inputs">
+					<form-group
+						data-input-id="funds"
+						data-label-text="Fonds disponibles"
+						data-extra-attrs="{}"></form-group>
+					<form-group
+						data-input-id="monthDay"
+						data-label-text="Date du jour"
+						data-extra-attrs="{'min': 1, 'max': 31}"></form-group>
+					<form-group
+						data-input-id="monthLength"
+						data-label-text="Nombre de jours dans le mois"
+						data-extra-attrs="{'min': 28, 'max': 31}"></form-group>
+					<form-group
+						data-input-id="nextIncomeDay"
+						data-label-text="Jour du prochain revenu"
+						data-extra-attrs="{'min': 1, 'max': 31}"></form-group>
+				</div>
 				<div id="controls">
-					<span id="reset-button" title="Tout effacer">Réinitialiser</span>
+					<button is="reset-button" title="Tout effacer">Réinitialiser</button>
 				</div>
 			</div>
 
 			<div id="display-budget">
 				<span title="La somme d'argent dépensable chaque jour jusqu'à la prochaine rentrée d'argent">Budget
 					journalier&thinsp;:</span>
-				<span id="budget-span"></span>
+				<span is="budget-display"></span>
 			</div>
 		</div>
 
 		<div id="theme-selection">
-			<div id="themes">
-				<div id="light-theme">Thème clair</div>
-				<div id="dark-theme">Thème sombre</div>
-			</div>
+			<select is="theme-selector"></select>
 		</div>
 	</main>
 

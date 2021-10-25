@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&display=swap');
 
-:root{
+:root {
 	--font1: 'Open Sans', Verdana, sans-serif;
 	--fs1: large;
 	--padding1: .75em;
 	--dodgerBlue: rgb(30, 144, 255);
-	
+}
+
+.dark-theme {
 	--borderColor1: #000;
 	--borderColor2: #333;
 	--borderColor-buttonHover: transparent;
@@ -15,6 +17,17 @@
 	--bgColor-buttonHover: #000;
 	--textColor: #0f0;
 	--textColor-budget: #ffff00;
+}
+
+.light-theme {
+	--borderColor1: blue;
+  --borderColor2: ghostwhite;
+  --borderColor-buttonHover: blue;
+  --bgColor: rgba(255, 255, 255, .91);
+  --bgColor-button: blue;
+  --bgColor-buttonHover: ghostwhite;
+  --textColor: blue;
+  --textColor-budget: red;
 }
 
 *, *::before, *::after {
@@ -76,7 +89,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-input[type=number] {
+input[type="number"] {
 	-moz-appearance: textfield;
 }
 
@@ -99,7 +112,7 @@ p {
 	grid-template-rows: repeat(4, 1fr);
 }
 
-.input {
+form-group {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -119,7 +132,7 @@ p {
 	border-top-color: var(--borderColor2);
 }
 
-#reset-button {
+button[is="reset-button"] {
 	background: var(--bgColor-button);
     padding: .5em;
     border-radius: 5px;
@@ -132,17 +145,17 @@ p {
 	transition: transform .2s linear;
 }
 
-#reset-button:hover {
+button[is="reset-button"]:hover {
 	color: var(--textColor);
 	background-color: var(--bgColor-buttonHover);
 	border-color: var(--borderColor-buttonHover);
 }
 
-#reset-button:active {
+button[is="reset-button"]:active {
 	transform: scale(.9);
 }
 
-#reset-button::selection {
+button[is="reset-button"]::selection {
 	background-color: transparent;
 }
 
@@ -156,7 +169,7 @@ p {
 	padding: var(--padding1);
 }
 
-#budget-span {
+span[is="budget-display"] {
 	color: var(--textColor-budget);
 	/* font-weight: bold; */
 	font-size: 1.2em;
@@ -166,13 +179,13 @@ p {
 /*  */
 /*  */
 
-#display-date {
+date-display {
 	padding: .7em .9em;
 	font-weight: 600;
 	background-color: rgba(255, 255, 255, .6);
 }
 
-#display-date:hover {
+date-display:hover {
 	background-color: rgba(255, 255, 255, 1);
 }
 
@@ -183,23 +196,23 @@ p {
 	font-family: 'Shippori Mincho', Constantia, Georgia, 'Times New Roman', Times, serif;
 }
 
-#themes div {
+select[is="theme-selector"] div {
 	padding: .15em .4em;
 	text-align: center;
 	cursor: default;
 	background-color: rgba(255, 255, 255, .75);
 }
 
-#themes div:hover {
+select[is="theme-selector"] div:hover {
 	background-color: var(--dodgerBlue);
 	color: #fff;
 }
 
-#themes div:first-child {
+select[is="theme-selector"] div:first-child {
 	visibility: hidden;
 }
 
-#themes:hover div:first-child {
+select[is="theme-selector"]:hover div:first-child {
 	transition: visibility .2s linear;
 	visibility: visible;
 }

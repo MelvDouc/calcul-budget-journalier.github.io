@@ -3,6 +3,7 @@ import DateDisplay from "./components/date-display.js";
 import FormGroup from "./components/form-group.js";
 import ResetButton from "./components/reset-button.js";
 import ThemeSelector from "./components/theme-selector.js";
+
 customElements.define("form-group", FormGroup);
 customElements.define("budget-display", BudgetDisplay, { extends: "span" });
 customElements.define("reset-button", ResetButton, { extends: "button" });

@@ -9,52 +9,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Calculer son budget journalier</title>
 	<link rel="icon" type="image/png" href="./assets/img/icon-euro.png">
-	<link rel="stylesheet" href="./assets/css/style.css">
+	<link rel="stylesheet" href="./assets/css/style.min.css">
 	<script type="module" src="./assets/js/main.js"></script>
 </head>
 
 <body class="dark-theme">
 
-	<main>
+	<section id="date">
 		<date-display></date-display>
+	</section>
 
-		<div id="content">
-			<div id="info">
-				<div id="the_inputs">
-					<form-group
-						data-input-id="funds"
-						data-label-text="Fonds disponibles"
-						data-extra-attrs="{}"></form-group>
-					<form-group
-						data-input-id="monthDay"
-						data-label-text="Date du jour"
-						data-extra-attrs="{'min': 1, 'max': 31}"></form-group>
-					<form-group
-						data-input-id="monthLength"
-						data-label-text="Nombre de jours dans le mois"
-						data-extra-attrs="{'min': 28, 'max': 31}"></form-group>
-					<form-group
-						data-input-id="nextIncomeDay"
-						data-label-text="Jour du prochain revenu"
-						data-extra-attrs="{'min': 1, 'max': 31}"></form-group>
-				</div>
-				<div id="controls">
-					<button is="reset-button" title="Tout effacer">Réinitialiser</button>
-				</div>
-			</div>
-
-			<div id="display-budget">
-				<span title="La somme d'argent dépensable chaque jour jusqu'à la prochaine rentrée d'argent">Budget
-					journalier&thinsp;:</span>
-				<span is="budget-display"></span>
-			</div>
+	<section id="calculator">
+		<div id="data-input">
+			<calc-form></calc-form>
+			<calc-button></calc-button>
 		</div>
-
-		<div id="theme-selection">
-			<select is="theme-selector"></select>
+		<div id="budget-output">
+			<span
+				title="La somme d'argent dépensable chaque jour jusqu'à la prochaine rentrée d'argent">
+				Budget journalier
+			</span>
+			<span is="budget-display"></span>
 		</div>
-	</main>
+	</section>
 
+	<section id="theme">
+		<select is="theme-selector"></select>
+	</section>
+	
 </body>
 
 </html>

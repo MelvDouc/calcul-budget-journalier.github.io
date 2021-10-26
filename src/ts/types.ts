@@ -9,3 +9,8 @@ export interface BudgetEventNamesInterface {
   NEW_BUDGET: string;
   RESET_INPUTS: string;
 }
+
+export enum THEMES {
+  DARK = "dark-theme",
+  LIGHT = "light-theme"
+}

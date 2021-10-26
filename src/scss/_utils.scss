@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&display=swap');
+
+$font-family-primary: 'Open Sans', Verdana, Arial, sans-serif;
+$font-family-secondary: 'Shippori Mincho', Constantia, Georgia, 'Times New Roman', Times, serif;
+
+.dark-theme {
+  --calculator-text-clr: rgb(0, 255, 0);
+  --form-bg-clr: rgba(43, 43, 43, .938);
+  --form-border-clr: black;
+  --form-middle-border-top-clr: rgb(50, 50, 50);
+  --reset-btn-bg-clr: white;
+  --reset-btn-bg-clr-hover: var(--form-border-clr);
+  --reset-btn-text-clr-hover: var(--calculator-text-clr);
+	--budget-display-clr: rgb(255, 224, 0);
+}
+
+.light-theme {
+  --calculator-text-clr: blue;
+  --form-bg-clr: rgba(255, 255, 255, .91);
+	--form-border-clr: blue;
+  --form-middle-border-top-clr: rgb(245, 245, 245);
+  --reset-btn-bg-clr: ghostwhite;
+  --reset-btn-bg-clr-hover: var(--form-border-clr);
+  --reset-btn-text-clr-hover: var(--form-bg-clr);
+  --budget-display-clr: red;
+}
